@@ -7,8 +7,16 @@ const deleteRequest = require("./methods/delete-request.js");
 // server olustur
 
 const server = http.createServer((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   // console.log(req.method)
   switch (req.method) {
+    case "OPTIONS":
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+      );
+      res.end();
+      break;
     case "GET":
       getRequest(req, res);
       break;
@@ -41,7 +49,7 @@ const server = http.createServer((req, res) => {
 //
 // belirlenen portu dinle
 
-const port = 5000;
+const port = 5001;
 
 server.listen(port, () => {
   console.log(`Server ${port}. porta gelen istekleri dinlemeye basladi`);
